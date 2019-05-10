@@ -9,7 +9,7 @@
   "files": [
     "dist"
   ],
-  "author": "wkl007 <499657357@qq.com>",
+  "author": "wkl",
   "repository": {
     "type": "git",
     "url": ""
@@ -33,6 +33,12 @@
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
     "precommit": "lint-staged",
     "travis-deploy-once": "travis-deploy-once"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
