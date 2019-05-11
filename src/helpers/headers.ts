@@ -30,3 +30,22 @@ export function processHeaders(headers: any, data: any): any {
   }
   return headers
 }
+
+/**
+ * 响应header格式化
+ * @param headers
+ */
+export function parseHeaders(headers: string): any {
+  let parsed = Object.create(null)
+  if (!headers) return parsed
+
+  headers.split('\r\n').forEach(line => {
+    let [key, val] = line.split(':')
+    key = key.trim().toLowerCase()
+    if (!key) return
+    if (val) val = val.trim()
+    parsed[key] = val
+  })
+
+  return parsed
+}
