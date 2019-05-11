@@ -1,4 +1,4 @@
-//联合类型
+// 联合类型
 export type Method =
   | 'get'
   | 'Get'
@@ -20,4 +20,5 @@ export interface AxiosRequestConfig {
   method?: Method
   data?: any
   params?: any
+  headers?: any
 }
