@@ -126,8 +126,8 @@ function registerExtendRouter () {
       code: 0,
       message: 'ok',
       result: {
-        name: 'jack',
-        age: 18
+        name: 'wkl',
+        age: 24
       }
     })
   })
