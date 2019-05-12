@@ -1,39 +1,55 @@
-import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from '../types'
-import xhr from '../xhr'
-import { buildURL } from '../helpers/url'
-import { transFormRequest, transFormResponse } from '../helpers/data'
-import { processHeaders } from '../helpers/headers'
+import { AxiosRequestConfig, AxiosPromise, Method } from '../types'
+import dispatchRequest from './dispatchRequest'
 
-function axios(config: AxiosRequestConfig): AxiosPromise {
-  processConfig(config)
-  return xhr(config).then(res => {
-    return transformResponseData(res)
-  })
+export default class Axios {
+  request(config: AxiosRequestConfig): AxiosPromise {
+    return dispatchRequest(config)
+  }
+
+  get(url: string, config?: AxiosRequestConfig): AxiosPromise {
+    return this._requestMethodWithoutData('get', url, config)
+  }
+
+  delete(url: string, config?: AxiosRequestConfig): AxiosPromise {
+    return this._requestMethodWithoutData('delete', url, config)
+  }
+
+  head(url: string, config?: AxiosRequestConfig): AxiosPromise {
+    return this._requestMethodWithoutData('head', url, config)
+  }
+
+  options(url: string, config?: AxiosRequestConfig): AxiosPromise {
+    return this._requestMethodWithoutData('options', url, config)
+  }
+
+  post(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise {
+    return this._requestMethodWithData('post', url, data, config)
+  }
+
+  put(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise {
+    return this._requestMethodWithData('put', url, data, config)
+  }
+
+  patch(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise {
+    return this._requestMethodWithData('patch', url, data, config)
+  }
+
+  _requestMethodWithoutData(method: Method, url: string, config?: AxiosRequestConfig) {
+    return this.request(
+      Object.assign(config || {}, {
+        method,
+        url
+      })
+    )
+  }
+
+  _requestMethodWithData(method: Method, url: string, data?: any, config?: AxiosRequestConfig) {
+    return this.request(
+      Object.assign(config || {}, {
+        method,
+        url,
+        data
+      })
+    )
+  }
 }
-
-function processConfig(config: AxiosRequestConfig): void {
-  config.url = transFormUrl(config)
-  config.headers = transFormHeaders(config) // 先处理headers
-  config.data = transFormRequestData(config) // 再处理data
-}
-
-function transFormUrl(config: AxiosRequestConfig): string {
-  const { url, params } = config
-  return buildURL(url, params)
-}
-
-function transFormRequestData(config: AxiosRequestConfig): any {
-  return transFormRequest(config.data)
-}
-
-function transFormHeaders(config: AxiosRequestConfig) {
-  const { headers = {}, data } = config
-  return processHeaders(headers, data)
-}
-
-function transformResponseData(res: AxiosResponse): AxiosResponse {
-  res.data = transFormResponse(res.data)
-  return res
-}
-
-export default axios
