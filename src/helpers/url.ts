@@ -74,10 +74,19 @@ export function buildURL(url: string, params?: any, paramsSerializer?: (params: 
   return url
 }
 
+/**
+ * 绝对地址
+ * @param url
+ */
 export function isAbsoluteURL(url: string): boolean {
   return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url)
 }
 
+/**
+ * url拼接
+ * @param baseURL
+ * @param relativeURL
+ */
 export function combineURL(baseURL: string, relativeURL?: string): string {
   return relativeURL ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '') : baseURL
 }
