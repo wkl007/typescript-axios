@@ -1,6 +1,7 @@
 import axios, { AxiosError } from '../../src/index'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import qs from 'qs'
 
 /*document.cookie = 'a=b'
 
@@ -29,7 +30,7 @@ instance.get('/more/get').then(res => {
   console.log(res)
 })*/
 
-const instance = axios.create()
+/*const instance = axios.create()
 
 function calculatePercentage(loaded: number, total: number) {
   return Math.floor(loaded) / total
@@ -88,9 +89,9 @@ uploadEl!.addEventListener('click', e => {
     console.log(fileEl.files[0])
     instance.post('/more/upload', data)
   }
-})
+})*/
 
-axios
+/*axios
   .post(
     '/more/post',
     {
@@ -127,4 +128,42 @@ axios
   })
   .catch((e: AxiosError) => {
     console.log(e.message)
+  })*/
+
+axios
+  .get('/more/get', {
+    params: new URLSearchParams('a=b&c=d')
+  })
+  .then(res => {
+    console.log(res)
+  })
+
+axios
+  .get('/more/get', {
+    params: {
+      a: 1,
+      b: 2,
+      c: ['a', 'b', 'c']
+    }
+  })
+  .then(res => {
+    console.log(res)
+  })
+
+const instance = axios.create({
+  paramsSerializer(params) {
+    return qs.stringify(params, { arrayFormat: 'brackets' })
+  }
+})
+
+instance
+  .get('/more/get', {
+    params: {
+      a: 1,
+      b: 2,
+      c: ['a', 'b', 'c']
+    }
+  })
+  .then(res => {
+    console.log(res)
   })
