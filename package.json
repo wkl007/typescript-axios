@@ -1,18 +1,20 @@
 {
-  "name": "typescript-axios",
-  "version": "0.0.0",
-  "description": "",
-  "keywords": [],
-  "main": "dist/typescript-axios.umd.js",
-  "module": "dist/typescript-axios.es5.js",
-  "typings": "dist/types/typescript-axios.d.ts",
+  "name": "typescript-axios-new",
+  "version": "0.1.0",
+  "description": "使用TypeScript实现axios",
+  "keywords": [
+    "typescript-axios"
+  ],
+  "main": "dist/axios.umd.js",
+  "module": "dist/axios.es5.js",
+  "typings": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],
-  "author": "wkl",
+  "author": "wkl <wkl921027@hotmail.com>",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/wkl007/typescript-axios"
   },
   "license": "MIT",
   "engines": {
@@ -33,7 +35,9 @@
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
     "precommit": "lint-staged",
-    "travis-deploy-once": "travis-deploy-once"
+    "travis-deploy-once": "travis-deploy-once",
+    "prepub": "npm run test:prod && npm run build",
+    "pub": "sh release.sh"
   },
   "husky": {
     "hooks": {
