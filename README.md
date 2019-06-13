@@ -1,5 +1,13 @@
-# typescript-axios
+# typescript-axios 
+![https://img.shields.io/npm/l/typescript-axios-new.svg](https://img.shields.io/npm/l/typescript-axios-new.svg)![https://img.shields.io/npm/v/typescript-axios-new.svg](https://img.shields.io/npm/v/typescript-axios-new.svg)![https://img.shields.io/badge/language-javascript.svg](https://img.shields.io/badge/language-javascript-green.svg)![https://img.shields.io/npm/dt/typescript-axios-new.svg](https://img.shields.io/npm/dt/typescript-axios-new.svg)
+
 使用TypeScript实现axios
+
+## Installation
+
+```bash
+npm install --save typescript-axios-new
+```
 
 ## Features
 
